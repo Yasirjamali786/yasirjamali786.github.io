@@ -1,310 +1,242 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yasir Jamali - Portfolio</title>
-    <!--
-      This is an HTML comment. We are using Tailwind CSS for styling.
-      The Inter font is also loaded for a clean, modern look.
-    -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* CSS comments for custom styles. */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* The canvas is a fixed background layer for the main content */
-        #animated-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        /* A different background style for the blog section */
-        .blogs-background {
-            background-image: linear-gradient(135deg, #2a2a4f 0%, #1e1e3e 100%);
-        }
-
-        /* Main content overlay with a backdrop filter for the frosted glass effect */
-        .content-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-
-        /* Styling for the scrollable main content area */
-        .main-content-scrollable {
-            max-height: 100vh;
-            overflow-y: auto;
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: #4a5568 #1a202c; /* Firefox */
-        }
-        
-        .main-content-scrollable::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .main-content-scrollable::-webkit-scrollbar-track {
-            background: #1a202c;
-        }
-        
-        .main-content-scrollable::-webkit-scrollbar-thumb {
-            background-color: #4a5568;
-            border-radius: 20px;
-            border: 2px solid #1a202c;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasir Jamali - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN for icons (v6.4.0) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Import the Inter font for a modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scrollbars */
+            background-color: #1a202c; /* Fallback background color */
+        }
+        /* Style for the canvas background */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+        }
+        /* Custom scrollbar styling for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #718096;
+        }
+        /* Active navigation link styling */
+        .nav-link.active {
+            font-weight: bold;
+            color: #3b82f6; /* Blue-500 */
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-gray-900 text-gray-100">
 
-    <!-- Canvas for the animated background -->
-    <canvas id="animated-background" class="bg-gray-900"></canvas>
-    
-    <!-- Content overlay for the blur effect -->
-    <div class="content-overlay"></div>
+    <!-- Canvas for the animating background -->
+    <canvas id="starsCanvas"></canvas>
 
-    <!-- Main container with flexbox for sidebar and content -->
-    <div class="flex h-screen">
+    <!-- Main container for the entire page -->
+    <div class="relative z-10 p-8 flex flex-col items-center">
 
-        <!-- Sidebar Navigation -->
-        <aside class="w-64 bg-gray-800 bg-opacity-50 p-6 flex flex-col justify-between border-r border-white border-opacity-20">
-            <nav>
-                <h2 class="text-3xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-indigo-500">
-                    Portfolio
-                </h2>
-                <ul>
-                    <li class="mb-4">
-                        <a href="#about" class="block text-gray-300 hover:text-white transition-colors duration-200 text-lg font-medium" onclick="showSection('about')">
-                            About Me
-                        </a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="#projects" class="block text-gray-300 hover:text-white transition-colors duration-200 text-lg font-medium" onclick="showSection('projects')">
-                            My Projects
-                        </a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="#blogs" class="block text-gray-300 hover:text-white transition-colors duration-200 text-lg font-medium" onclick="showSection('blogs')">
-                            My Blogs
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <!-- Hero Section - centered content with name and social links -->
+        <header class="text-center mb-16 mt-8">
+            <h1 class="text-6xl md:text-8xl font-extrabold text-blue-300">Yasir Jamali</h1>
+            <h2 class="text-2xl md:text-4xl text-blue-400 mt-2">Portfolio</h2>
+            <!-- Social media links, now horizontally aligned with consistent spacing -->
+            <div class="flex flex-wrap justify-center space-x-6 mt-6">
+                <!-- Telegram Link -->
+                <a href="https://t.me/yasirjamali786" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" aria-label="Telegram">
+                    <i class="fab fa-telegram fa-3x"></i>
+                </a>
+                <!-- LinkedIn Link -->
+                <a href="https://www.linkedin.com/in/yasir-ali-51207a77?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in fa-3x"></i>
+                </a>
+                <!-- X (Twitter) Link -->
+                <a href="https://x.com/yasirjamali786?t=EffMuVLoYULXz_OmUqbQ5w&s=09" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" aria-label="X">
+                    <i class="fab fa-x-twitter fa-3x"></i>
+                </a>
+                <!-- Facebook Link -->
+                <a href="https://www.facebook.com/share/1BGrE23maM/" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" aria-label="Facebook">
+                    <i class="fab fa-facebook-f fa-3x"></i>
+                </a>
+                <!-- TikTok Link -->
+                <a href="https://www.tiktok.com/@yasirjamali498?_t=ZS-8yb118NyzJo&_r=1" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" aria-label="TikTok">
+                    <i class="fab fa-tiktok fa-3x"></i>
+                </a>
+                <!-- Kaggle Link -->
+                <a href="https://www.kaggle.com/yasirali786" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" aria-label="Kaggle">
+                    <i class="fab fa-kaggle fa-3x"></i>
+                </a>
+                <!-- Instagram Link -->
+                <a href="https://www.instagram.com/yasirjamali145?igsh=azBlZGxpdHR1cnZ1" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" aria-label="Instagram">
+                    <i class="fab fa-instagram fa-3x"></i>
+                </a>
+                <!-- Threads Link -->
+                <a href="https://www.threads.com/@yasirjamali145" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" aria-label="Threads">
+                    <i class="fab fa-threads fa-3x"></i>
+                </a>
+            </div>
+        </header>
 
-            <!-- Social Media Links (as professional icons) -->
-            <div class="flex flex-wrap gap-4 justify-start">
-                <!-- GitHub -->
-                <a href="https://github.com/Yasirjamali786" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.303-.535-1.524.118-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.771.84 1.236 1.911 1.236 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.8.576 4.765-1.589 8.199-6.09 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                    </svg>
-                </a>
-                <!-- LinkedIn -->
-                <a href="https://www.linkedin.com/in/yasir-ali-51207a77?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.765s.784-1.765 1.75-1.765 1.75.79 1.75 1.765-.783 1.765-1.75 1.765zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
-                </a>
-                <!-- X (formerly Twitter) -->
-                <a href="https://x.com/yasirjamali786?t=EffMuVLoYULXz_OmUqbQ5w&s=09" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.064 7.645c-.379.166-.786.273-1.213.322.435-.262.771-.676.929-1.169-.408.24-.863.415-1.347.509-.387-.414-.94-.672-1.55-.672-1.168 0-2.115.947-2.115 2.115 0 .166.018.328.051.484-1.759-.088-3.313-.932-4.355-2.204-.181.312-.286.674-.286 1.066 0 .733.373 1.379.94 1.757-.346-.01-.672-.106-.955-.263-.001.009-.001.018-.001.028 0 1.025.729 1.88 1.695 2.072-.178.048-.364.074-.556.074-.136 0-.267-.013-.396-.038.269.84 1.054 1.451 1.986 1.472-.724.568-1.636.908-2.628.908-.172 0-.342-.01-.51-.03 1.12.721 2.455 1.14 3.896 1.14 4.673 0 7.228-3.874 7.228-7.228 0-.11 0-.22-.008-.329.496-.358.927-.803 1.267-1.31z" />
-                    </svg>
-                </a>
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/share/1BGrE23maM/" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.6c-.6 0-.8.4-.8.7v1h2.4l-.3 2.5h-2.1v7.2h-3v-7.2h-2v-2.5h2v-1.5c0-1.5 1-2.4 2.8-2.4h1.7v2.4z" />
-                    </svg>
-                </a>
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/yasirjamali145?igsh=azBlZGxpdHR1cnZ1" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.252.148 4.773 1.632 4.925 4.85.056 1.265.068 1.644.068 4.849 0 3.204-.012 3.584-.068 4.85-.152 3.237-1.675 4.758-4.925 4.925-1.267.057-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.147-4.773-1.63-4.925-4.85-.056-1.265-.068-1.644-.068-4.849 0-3.204.012-3.584.068-4.85.152-3.237 1.675-4.758 4.925-4.925 1.267-.057 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.058 1.281-.072 1.689-.072 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.442.646-1.442 1.443s.646 1.443 1.442 1.443c.796 0 1.443-.646 1.443-1.443s-.647-1.443-1.443-1.443z" />
-                    </svg>
-                </a>
-                <!-- Threads -->
-                <a href="https://www.threads.com/@yasirjamali145" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2c-3.314 0-6 2.686-6 6v8c0 3.314 2.686 6 6 6s6-2.686 6-6v-8c0-3.314-2.686-6-6-6zm0 13c-2.761 0-5-2.239-5-5v-1c0-2.761 2.239-5 5-5s5 2.239 5 5v1c0 2.761-2.239 5-5 5z" />
-                    </svg>
-                </a>
-                <!-- Telegram -->
-                <a href="https://t.me/yasirjamali786" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M24 12c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12 12 5.373 12 12zm-6.852-3.667l-2.071 9.48c-.147.653-.518.815-1.07.502l-3.042-2.222-1.464 1.41c-.161.157-.295.293-.654.293l.413-2.929 5.867-5.313c.254-.225-.06-.35-.399-.124l-7.234 4.542-2.883-.902c-.642-.204-.658-.663.125-.972l17.702-6.85c.57-.22.955.197.64.717z" />
-                    </svg>
-                </a>
-                <!-- TikTok -->
-                <a href="https://www.tiktok.com/@yasirjamali498?_t=ZS-8yb118NyzJo&_r=1" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M21.5 12.001c.219-1.928-.291-3.682-1.411-4.877-1.12-1.196-2.585-1.782-4.225-1.782h-3.414v12.285h-2.193v-12.285h-2.093c-2.457.067-4.195 1.547-4.195 4.316 0 2.235 1.258 3.513 3.018 3.513.791 0 1.516-.289 2.115-.815v2.247c-1.399.721-3.593 1.096-5.836.815-2.836-.375-4.834-1.905-4.834-4.834 0-2.836 2.012-4.757 4.908-5.074 2.457-.265 4.707.962 5.926 3.064v-.966c-.63-.996-1.583-1.637-2.67-1.637-1.313 0-2.155.857-2.155 2.155 0 .84.343 1.516.924 2.115v.982h2.248v-2.247h2.093v4.194h-2.193v2.296h-3.414c-1.114 0-2.128-.514-2.81-1.365h-.001c-1.077 1.082-2.164 1.623-3.255 1.623-2.193 0-3.513-1.32-3.513-3.513 0-2.193 1.32-3.513 3.513-3.513 1.091 0 2.178.541 3.255 1.623h.001c.682.851 1.696 1.365 2.81 1.365h2.093v-2.296h2.193v2.296h3.414c1.114 0 2.128-.514 2.81-1.365h.001c1.077 1.082 2.164 1.623 3.255 1.623 2.193 0 3.513-1.32 3.513-3.513 0-2.193-1.32-3.513-3.513-3.513-1.091 0-2.178.541-3.255 1.623z" />
-                    </svg>
-                </a>
-                <!-- Kaggle -->
-                <a href="https://www.kaggle.com/yasirali786" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.666 16.945l-3.334-3.334 3.334-3.334 3.334 3.334-3.334 3.334zm-3.334-10.945l-3.334 3.334 3.334 3.334 3.334-3.334-3.334-3.334zm10.334 6.666l-3.334 3.334 3.334 3.334 3.334-3.334-3.334-3.334z" />
-                    </svg>
-                </a>
-            </div>
-        </aside>
+        <!-- Main Content Area -->
+        <main class="w-full max-w-4xl">
+            <!-- Navigation links that scroll to sections - placed above the main content -->
+            <nav class="flex justify-center space-x-6 mb-16 text-xl">
+                <a href="#about" class="nav-link text-gray-300 hover:text-blue-400 transition-colors duration-300">About Me</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-blue-400 transition-colors duration-300">My Projects</a>
+                <a href="#blogs" class="nav-link text-gray-300 hover:text-blue-400 transition-colors duration-300">My Blogs</a>
+            </nav>
 
-        <!-- Main Content Area -->
-        <main id="main-content-container" class="flex-1 p-8 md:p-16 main-content-scrollable">
-            
-            <!-- About Me Section -->
-            <section id="about" class="section-content">
-                <div class="bg-white bg-opacity-10 rounded-2xl shadow-xl p-6 md:p-12 border border-white border-opacity-20 max-w-4xl mx-auto">
-                    <div class="text-center">
-                        <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-indigo-500">
-                            Yasir Jamali
-                        </h1>
-                        <p class="text-lg md:text-xl max-w-2xl mx-auto">
-                            I'm from Dadu, Sindh. I received my early education from Army Public School and College, Dadu, earning an A grade from BISE Hyderabad. I then completed my Intermediate with an A grade from Degree College Johi, also from BISE Hyderabad. I graduated from the University of Sindh, Jamshoro, with a 3.20 CGPA in the Department of Commerce, specializing in Finance.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <!-- About Me Section -->
+            <section id="about" class="mb-16">
+                <div class="bg-gray-800 bg-opacity-70 p-8 rounded-lg shadow-xl backdrop-filter backdrop-blur-lg">
+                    <h2 class="text-3xl font-bold mb-6 text-blue-300">About Me</h2>
+                    <p class="text-lg leading-relaxed text-gray-200">
+                        Hailing from Dadu, Sindh, I completed my early education at Army Public School and College, where I achieved an A grade from BISE Hyderabad. I further pursued my Intermediate studies at Degree College Johi, also earning an A grade. My academic journey culminated at the University of Sindh, Jamshoro, where I graduated from the Department of Commerce with a specialization in Finance and a CGPA of 3.20.
+                    </p>
+                </div>
+            </section>
 
-            <!-- Projects Section -->
-            <!-- CHANGE: Added 'section-content' class here to fix the display issue. -->
-            <section id="projects" class="mb-12 section-content hidden">
-                <h2 class="text-4xl font-bold mb-4 text-blue-300">My Projects</h2>
-                <div class="empty-section p-4 rounded-lg text-gray-400">
-                    <p>No projects to display yet. Check back soon!</p>
-                </div>
-            </section>
+            <!-- My Projects Section -->
+            <section id="projects" class="mb-16">
+                <div class="bg-gray-800 bg-opacity-70 p-8 rounded-lg shadow-xl backdrop-filter backdrop-blur-lg">
+                    <h2 class="text-3xl font-bold mb-6 text-blue-300">My Projects</h2>
+                    <!-- Placeholder content for projects -->
+                    <div class="text-gray-400 text-center py-12">
+                        <p>No projects to display yet. Check back soon!</p>
+                    </div>
+                </div>
+            </section>
 
-            <!-- Blogs Section -->
-            <!-- CHANGE: Added 'section-content' class here to fix the display issue. -->
-            <section id="blogs" class="mb-12 section-content hidden">
-                <h2 class="text-4xl font-bold mb-4 text-purple-300">My Blogs</h2>
-                <div class="empty-section p-4 rounded-lg text-gray-400">
-                    <p>No blog posts to display yet. Check back soon!</p>
-                </div>
-            </section>
+            <!-- My Blogs Section -->
+            <section id="blogs" class="mb-16">
+                <div class="bg-gray-800 bg-opacity-70 p-8 rounded-lg shadow-xl backdrop-filter backdrop-blur-lg">
+                    <h2 class="text-3xl font-bold mb-6 text-blue-300">My Blogs</h2>
+                    <!-- Placeholder content for blogs -->
+                    <div class="text-gray-400 text-center py-12">
+                        <p>No blog posts to display yet. Check back soon!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
+    <!-- JavaScript for the background animation and scroll events -->
+    <script>
+        const canvas = document.getElementById('starsCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        let numStars = 200;
+        let width, height;
 
-    <!-- JavaScript for the animated background and section switching -->
-    <script>
-        // Get the canvas and its context
-        const canvas = document.getElementById('animated-background');
-        const ctx = canvas.getContext('2d');
-        let animationFrameId;
+        // Function to handle canvas resizing
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initStars(); // Re-initialize stars on resize to distribute them correctly
+        }
 
-        // Function to set the canvas size to the window dimensions
-        const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        };
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        // Star object constructor
+        function Star() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.size = Math.random() * 2 + 2; // From 2 to 4 pixels
+            this.vx = (Math.random() - 0.5) * 0.2; // -0.1 to 0.1
+            this.vy = (Math.random() - 0.5) * 0.2; // -0.1 to 0.1
+            this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.5})`; // 0.5 to 1.0 opacity
+        }
 
-        // Define the Particle class for our animated background
-        class Particle {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                // CHANGE: Increased alpha value to make particles brighter.
-                this.color = 'rgba(255, 255, 255, 0.9)';
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+        Star.prototype.update = function() {
+            this.x += this.vx;
+            this.y += this.vy;
 
-        let particles = [];
-        // Initialize particles array with 100 particles at random positions
-        function init() {
-            particles = [];
-            for (let i = 0; i < 100; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                particles.push(new Particle(x, y));
-            }
-        }
-        init();
+            // Wrap stars around the screen
+            if (this.x < 0) this.x = width;
+            if (this.x > width) this.x = 0;
+            if (this.y < 0) this.y = height;
+            if (this.y > height) this.y = 0;
+        };
 
-        // The main animation loop.
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                const particle1 = particles[i];
-                particle1.update();
-                particle1.draw();
-                for (let j = i; j < particles.length; j++) {
-                    const particle2 = particles[j];
-                    const dx = particle1.x - particle2.x;
-                    const dy = particle1.y - particle2.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        // CHANGE: The strokeStyle makes the lines brighter.
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.9 - distance / 100})`;
-                        // CHANGE: Increased the line width to make them slightly thicker and more visible.
-                        ctx.lineWidth = 0.8;
-                        ctx.moveTo(particle1.x, particle1.y);
-                        ctx.lineTo(particle2.x, particle2.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            animationFrameId = requestAnimationFrame(animate);
-        }
+        Star.prototype.draw = function() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+        };
 
-        // Function to show the selected content section
-        function showSection(sectionId) {
-            // Hide all sections first
-            document.querySelectorAll('.section-content').forEach(section => {
-                section.classList.add('hidden');
-            });
-            // Show the requested section
-            document.getElementById(sectionId).classList.remove('hidden');
+        // Initialize stars
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < numStars; i++) {
+                stars.push(new Star());
+            }
+        }
 
-            // Change the background based on the section
-            const background = document.getElementById('animated-background');
-            if (sectionId === 'blogs') {
-                background.classList.add('blogs-background');
-            } else {
-                background.classList.remove('blogs-background');
-            }
-        }
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, width, height);
 
-        // Start the animation on window load
-        window.onload = function () {
-            animate();
-            // Show the 'about' section by default on page load
-            showSection('about');
-        };
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].update();
+                stars[i].draw();
+            }
+        }
 
-        // Clean up function to stop the animation on page unload (optional but good practice)
-        window.onbeforeunload = function() {
-            cancelAnimationFrame(animationFrameId);
-        };
-    </script>
+        // Intersection Observer for highlighting the active navigation link on scroll
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50px', // Adjust margin to fine-tune trigger point
+            threshold: 0.5 // Trigger when 50% of the section is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').includes(sectionId)) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Initialize on window load and resize
+        window.onload = function() {
+            resizeCanvas();
+            animate();
+        };
+
+        window.addEventListener('resize', resizeCanvas);
+    </script>
 </body>
 </html>
