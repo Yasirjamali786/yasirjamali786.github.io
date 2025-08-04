@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasir Jamali - Portfolio</title>
+    <!--
+      This is an HTML comment. It's great for explaining parts of your code.
+      We're loading Tailwind CSS from a CDN to handle all the styling.
+    -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* This is a CSS comment. We're using the Inter font for a modern look. */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Set the canvas to be a fixed background that covers the entire screen */
+        #animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Make sure the canvas is behind the main content */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-hidden">
+    <!-- Canvas for the animated background -->
+    <canvas id="animated-background"></canvas>
+
+    <!-- Main content container with a blurred glass effect on top of the canvas -->
+    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 md:p-16">
+        <div class="max-w-4xl w-full bg-white bg-opacity-10 backdrop-filter backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-12 border border-white border-opacity-20">
+
+            <!-- About Me Section -->
+            <section class="text-center mb-12">
+                <!-- Replace with your name -->
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-indigo-500">
+                    Yasir Jamali
+                </h1>
+                <!-- Replace this text with your bio -->
+                <p class="text-lg md:text-xl max-w-2xl mx-auto">
+                    Welcome to my digital space. I'm a passionate developer creating engaging web applications and exploring new technologies.
+                </p>
+            </section>
+
+            <!-- Projects Section -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-center">Projects</h2>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <!-- Replace this project with your own project 1 -->
+                    <div class="bg-white bg-opacity-5 p-6 rounded-lg hover:bg-opacity-10 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-2">Scientific Calculator</h3>
+                        <p class="text-gray-300 mb-4">A web-based scientific calculator with Gemini AI integration.</p>
+                        <a href="https://yasirjamali786.github.io/scientific-calculator" class="inline-block text-blue-300 hover:text-blue-200 transition-colors duration-300 font-medium">
+                            View Project &rarr;
+                        </a>
+                    </div>
+                    <!-- Replace this project with your own project 2 -->
+                    <div class="bg-white bg-opacity-5 p-6 rounded-lg hover:bg-opacity-10 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-2">My First Blog</h3>
+                        <p class="text-gray-300 mb-4">A project exploring Blogger and content creation.</p>
+                        <a href="https://yasirjamali786.github.io/my-first-blog" class="inline-block text-blue-300 hover:text-blue-200 transition-colors duration-300 font-medium">
+                            View Project &rarr;
+                        </a>
+                    </div>
+                    <!-- Replace this project with your own project 3 -->
+                    <div class="bg-white bg-opacity-5 p-6 rounded-lg hover:bg-opacity-10 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-2">Another Project</h3>
+                        <p class="text-gray-300 mb-4">This is a placeholder for your next cool project.</p>
+                        <a href="#" class="inline-block text-blue-300 hover:text-blue-200 transition-colors duration-300 font-medium">
+                            View Project &rarr;
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="text-center">
+                <h2 class="text-3xl md:text-4xl font-semibold mb-6">Connect with Me</h2>
+                <div class="flex justify-center space-x-6">
+                    <!-- GitHub Link (already populated) -->
+                    <a href="https://github.com/Yasirjamali786" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
+                        <!-- GitHub Icon (inline SVG for no external dependencies) -->
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.303-.535-1.524.118-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.771.84 1.236 1.911 1.236 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.8.576 4.765-1.589 8.199-6.09 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+
+                    <!-- Add your LinkedIn, Twitter, or other social media links here -->
+                    <!-- Example:
+                    <a href="YOUR_LINKEDIN_URL" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.765s.784-1.765 1.75-1.765 1.75.79 1.75 1.765-.783 1.765-1.75 1.765zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                    -->
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- JavaScript for the animated background -->
+    <script>
+        // Get the canvas and its context
+        const canvas = document.getElementById('animated-background');
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+
+        // Function to set the canvas size to the window dimensions
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Define the Particle class for our animated background
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 2 + 1; // Random size for a varied effect
+                this.speedX = Math.random() * 0.5 - 0.25; // Random horizontal speed
+                this.speedY = Math.random() * 0.5 - 0.25; // Random vertical speed
+                this.color = 'rgba(255, 255, 255, 0.8)'; // White particles
+            }
+
+            // Method to update the particle's position
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                // If a particle goes off-screen, reset its position or reverse its direction
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            }
+
+            // Method to draw the particle on the canvas
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        let particles = [];
+        // Initialize particles array with 100 particles at random positions
+        function init() {
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                particles.push(new Particle(x, y));
+            }
+        }
+        init();
+
+        // The main animation loop.
+        function animate() {
+            // Clear the entire canvas for the next frame
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Loop through all particles
+            for (let i = 0; i < particles.length; i++) {
+                const particle1 = particles[i];
+                particle1.update();
+                particle1.draw();
+
+                // Connect particles that are close to each other with lines
+                for (let j = i; j < particles.length; j++) {
+                    const particle2 = particles[j];
+                    const dx = particle1.x - particle2.x;
+                    const dy = particle1.y - particle2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Only draw a line if the distance is within a certain threshold
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particle1.x, particle1.y);
+                        ctx.lineTo(particle2.x, particle2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        // Start the animation on window load
+        window.onload = function () {
+            animate();
+        };
+
+        // Clean up function to stop the animation on page unload (optional but good practice)
+        window.onbeforeunload = function() {
+            cancelAnimationFrame(animationFrameId);
+        };
+
+    </script>
+</body>
+</html>
